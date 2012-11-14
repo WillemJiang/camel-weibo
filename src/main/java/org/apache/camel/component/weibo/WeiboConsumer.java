@@ -16,15 +16,15 @@
  */
 package org.apache.camel.component.weibo;
 
-import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.impl.ScheduledPollConsumer;
 import weibo4j.Timeline;
 import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
+
+import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The Weibo consumer.
@@ -57,6 +57,7 @@ public class WeiboConsumer extends ScheduledPollConsumer {
             getProcessor().process(e);
             total++;
         }
+        System.out.println("result size is " + total);
         return total;
     }
 

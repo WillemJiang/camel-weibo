@@ -24,8 +24,6 @@ public class WeiboConfiguration {
      * OAuth
      */
     private String accessToken;
-    private String clientId;
-    private String clientSecret;
 
     private int delay;
 
@@ -45,14 +43,6 @@ public class WeiboConfiguration {
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
     }
 
     public int getDelay() {
