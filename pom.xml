@@ -25,7 +25,7 @@
     </dependency>
  
     <dependency>
-      <groupId>sina.com</groupId>
+      <groupId>weibo4j</groupId>
       <artifactId>weibo4j-oauth2</artifactId>
       <version>2.1-beta</version>
     </dependency>
