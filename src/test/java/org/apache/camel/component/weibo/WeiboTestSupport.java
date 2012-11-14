@@ -16,12 +16,12 @@
  */
 package org.apache.camel.component.weibo;
 
-import org.apache.camel.test.junit4.CamelTestSupport;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
+
+import org.apache.camel.test.junit4.CamelTestSupport;
 
 public class WeiboTestSupport extends CamelTestSupport {
     private String accessToken;
