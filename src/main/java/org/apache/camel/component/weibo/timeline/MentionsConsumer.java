@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.weibo.timeline;
 
+import java.util.List;
+
 import org.apache.camel.component.weibo.Weibo4JPuller;
 import org.apache.camel.component.weibo.WeiboEndpoint;
 import weibo4j.Timeline;
@@ -24,14 +26,12 @@ import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 
-import java.util.List;
-
 public class MentionsConsumer extends Weibo4JPuller {
 
     public MentionsConsumer(WeiboEndpoint we) {
         super(we);
     }
-   
+
     @Override
     public List<Status> pollStatus(long lastId) throws WeiboException {
         Timeline timeline = endpoint.getConfiguration().createTimeline();

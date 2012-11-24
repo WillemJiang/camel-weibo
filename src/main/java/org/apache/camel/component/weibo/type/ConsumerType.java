@@ -19,7 +19,7 @@ package org.apache.camel.component.weibo.type;
 
 public enum ConsumerType {
 
-    TIMELINE, SEARCH, TRENDS, DIRECTMESSAGE, STREAMING, UNKNOWN;
+    TIMELINE, SEARCH, TRENDS, UNKNOWN;
 
     public static ConsumerType fromUri(String uri) {
         for (ConsumerType consumerType : ConsumerType.values()) {
