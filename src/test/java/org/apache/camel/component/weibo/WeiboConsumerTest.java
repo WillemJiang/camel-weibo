@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.weibo;
 
-import java.util.List;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -25,17 +23,27 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class WeiboConsumerTest extends WeiboTestSupport {
     private static final transient Logger LOG = LoggerFactory.getLogger(WeiboConsumerTest.class);
+    
+    protected String getFromURI() {
+        return "weibo://timeline/public/?";
+    }
 
     @Test
     public void testConsumerTest() throws Exception {
         MockEndpoint mock = getMockEndpoint("mock:result");
+        // just make sure we can get some date here.
         mock.expectedMinimumMessageCount(1);
+        
         mock.assertIsSatisfied();
-        List<Exchange> weibo = mock.getExchanges();
-        for (Exchange e : weibo) {
-            LOG.info("Weibo: " + e.getIn().getBody(String.class));
+        List<Exchange> weibos = mock.getExchanges();
+        if (LOG.isInfoEnabled()) {
+            for (Exchange e : weibos) {
+                LOG.info("Weibo: " + e.getIn().getBody(String.class));
+            }
         }
 
     }
@@ -44,7 +52,7 @@ public class WeiboConsumerTest extends WeiboTestSupport {
     protected RouteBuilder createRouteBuilder() throws Exception {
         return new RouteBuilder() {
             public void configure() {
-                from("weibo://timeline/mention/?" + getUriTokens() + "&delay=30")
+                from(getFromURI() + getUriTokens() + "&delay=30")
                     .to("mock:result");
 
             }

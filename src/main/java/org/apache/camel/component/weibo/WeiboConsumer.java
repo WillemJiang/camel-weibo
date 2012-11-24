@@ -22,33 +22,27 @@ import java.util.concurrent.TimeUnit;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.impl.ScheduledPollConsumer;
-import weibo4j.Timeline;
 import weibo4j.model.Status;
-import weibo4j.model.StatusWapper;
 
 /**
  * The Weibo consumer.
  */
 public class WeiboConsumer extends ScheduledPollConsumer {
-    private final WeiboEndpoint endpoint;
+    
+    private Weibo4JPuller puller;
 
-    public WeiboConsumer(WeiboEndpoint endpoint, Processor processor) {
+    public WeiboConsumer(WeiboEndpoint endpoint, Weibo4JPuller puller, Processor processor) {
         super(endpoint, processor);
-        this.endpoint = endpoint;
+        this.puller = puller;
         int delay = endpoint.getConfiguration().getDelay();
         setInitialDelay(1);
         setDelay(delay);
         setTimeUnit(TimeUnit.SECONDS);
-
     }
 
     @Override
     protected int poll() throws Exception {
-        Timeline timeline = endpoint.getConfiguration().createTimeline();
-        // TODO need to find a way to remember the last status id
-        StatusWapper result = timeline.getMentions();
-        Iterator<Status> i = result.getStatuses().iterator();
-
+        Iterator<Status> i = puller.pollConsume().iterator();
         int total = 0;
         while (i.hasNext()) {
             Exchange e = getEndpoint().createExchange();
@@ -57,7 +51,6 @@ public class WeiboConsumer extends ScheduledPollConsumer {
             getProcessor().process(e);
             total++;
         }
-        System.out.println("result size is " + total);
         return total;
     }
 

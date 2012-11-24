@@ -43,11 +43,12 @@ public class WeiboEndpoint extends DefaultEndpoint {
     }
 
     public Consumer createConsumer(Processor processor) throws Exception {
-        return new WeiboConsumer(this, processor);
+        Weibo4JPuller puller = Weibo4JFactory.getConsumer(this, getEndpointUri());
+        return new WeiboConsumer(this, puller, processor);
     }
 
     public boolean isSingleton() {
-        return true;
+        return false;
     }
 
     public WeiboConfiguration getConfiguration() {
