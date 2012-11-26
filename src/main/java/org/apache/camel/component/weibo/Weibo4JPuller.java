@@ -16,10 +16,10 @@
  */
 package org.apache.camel.component.weibo;
 
-import java.util.List;
-
 import weibo4j.model.Status;
 import weibo4j.model.WeiboException;
+
+import java.util.List;
 
 
 public abstract class Weibo4JPuller {
@@ -51,6 +51,10 @@ public abstract class Weibo4JPuller {
             checkLastId(new Long(s.getId()));
         }
         return answer;
+    }
+
+    public void setLastId(long lastId) {
+        this.lastId = lastId;
     }
    
     public abstract List<Status> pollStatus(long lastId) throws WeiboException;

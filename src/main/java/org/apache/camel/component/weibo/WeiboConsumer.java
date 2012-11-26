@@ -16,13 +16,13 @@
  */
 package org.apache.camel.component.weibo;
 
-import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.impl.ScheduledPollConsumer;
 import weibo4j.model.Status;
+
+import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The Weibo consumer.
@@ -38,6 +38,8 @@ public class WeiboConsumer extends ScheduledPollConsumer {
         setInitialDelay(1);
         setDelay(delay);
         setTimeUnit(TimeUnit.SECONDS);
+        // update the lastId of the puller
+        puller.setLastId(endpoint.getConfiguration().getLastId());
     }
 
     @Override

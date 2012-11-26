@@ -27,6 +27,8 @@ public class WeiboConfiguration {
 
     private int delay;
 
+    private long lastId = 1;
+
     public WeiboConfiguration() {
         // need to load the configuration somewhere
     }
@@ -51,6 +53,14 @@ public class WeiboConfiguration {
 
     public void setDelay(int delay) {
         this.delay = delay;
+    }
+
+    public long getLastId() {
+        return lastId;
+    }
+
+    public void setLastId(long lastId) {
+        this.lastId = lastId;
     }
 
 }
