@@ -34,9 +34,9 @@ public class WeiboConsumer extends ScheduledPollConsumer {
     public WeiboConsumer(WeiboEndpoint endpoint, Weibo4JPuller puller, Processor processor) {
         super(endpoint, processor);
         this.puller = puller;
-        int delay = endpoint.getConfiguration().getDelay();
-        setInitialDelay(1);
-        setDelay(delay);
+        setInitialDelay(endpoint.getConfiguration().getInitialDelay());
+        setDelay(endpoint.getConfiguration().getDelay());
+        // use the second as the time unit
         setTimeUnit(TimeUnit.SECONDS);
         // update the lastId of the puller
         puller.setLastId(endpoint.getConfiguration().getLastId());

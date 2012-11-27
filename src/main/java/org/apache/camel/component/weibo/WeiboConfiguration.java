@@ -25,7 +25,9 @@ public class WeiboConfiguration {
      */
     private String accessToken;
 
-    private int delay;
+    private long delay;
+
+    private long initialDelay = 1;
 
     private long lastId = 1;
 
@@ -47,12 +49,20 @@ public class WeiboConfiguration {
         this.accessToken = accessToken;
     }
 
-    public int getDelay() {
+    public long getDelay() {
         return delay;
     }
 
-    public void setDelay(int delay) {
+    public void setDelay(long delay) {
         this.delay = delay;
+    }
+
+    public long getInitialDelay() {
+        return initialDelay;
+    }
+
+    public void setInitialDelay(long initialDelay) {
+        this.initialDelay = initialDelay;
     }
 
     public long getLastId() {
